@@ -24,8 +24,11 @@ public class OCRNekoAtsumeTestSuite {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("appPackage", "jp.co.hit_point.nekoatsume");
         capabilities.setCapability("appActivity", "jp.co.hit_point.nekoatsume.GActivity");
-        capabilities.setCapability("deviceName", "Android Emulator");
-        capabilities.setCapability("platformVersion", "5.0.1");
+        //capabilities.setCapability("deviceName", "Android Emulator");
+        capabilities.setCapability("deviceName", "ZX1G42BS58");
+        //capabilities.setCapability("platformVersion", "5.0.1");
+        capabilities.setCapability("platformVersion", "7.0");
+        capabilities.setCapability("noReset", true);
 
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
         wait = new WebDriverWait(driver, 10);
@@ -69,9 +72,9 @@ public class OCRNekoAtsumeTestSuite {
     }
 
     @Test
-    public void refillWithLongPressTest() {
-        String foodBowlImgLoc = imgDir + "/foodBowl.png";
-        String yesBowlImgLoc = imgDir + "/yesBowl.png";
+    public void refillWithLongPressTest() throws Exception {
+        String foodBowlImgLoc = imgDir + "/foodBowl2560.png";
+        String yesBowlImgLoc = imgDir + "/yesBowl2560.png";
 
         OCR.waitUntilImageExists(foodBowlImgLoc, 30);
         OCR.longPressByImage(foodBowlImgLoc);

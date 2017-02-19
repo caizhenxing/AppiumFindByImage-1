@@ -34,12 +34,15 @@ import org.sikuli.script.Finder;
 import org.sikuli.script.Match;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.awt.Image.SCALE_AREA_AVERAGING;
 
 public class OCR {
 
@@ -161,6 +164,23 @@ public class OCR {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        int height = 1920;
+        int width = 1080;
+
+        BufferedImage shrinkImage
+                = new BufferedImage(width, height, bufferedImage.getType());
+        shrinkImage.getGraphics()
+                .drawImage(bufferedImage.getScaledInstance(width, height
+                        , Image.SCALE_AREA_AVERAGING)
+                        , 0, 0, width, height, null);
+        try {
+            ImageIO.write(shrinkImage, "png", new File("screenshot.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //return shrinkImage;
         return bufferedImage;
     }
 
